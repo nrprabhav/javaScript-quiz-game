@@ -19,7 +19,7 @@ function setTime() {
             // Stops execution of action at set interval
             clearInterval(timerInterval);
             // Calls function to create and append image
-            sendMessage();
+            //sendMessage();
         }
 
     }, 1000);
@@ -27,7 +27,16 @@ function setTime() {
 
 btnStart.addEventListener("click", function(){
     startScreen.setAttribute("class","hide");
-    
+    let currentQuestion = questions[Math.floor(Math.random() * 10)];
+    questionTitle.textContent = currentQuestion.title;
+    let ol = document.createElement("ol");
+    for(i=0; i<currentQuestion.choices.length; i++){
+        let choiceText = currentQuestion.choices[i];
+        let li = document.createElement("li");
+        li.textContent = choiceText;
+        ol.appendChild(li);
+    }
+    choices.appendChild(ol);
     questionScreen.setAttribute("class","start");
     setTime();
 })
