@@ -67,6 +67,10 @@ li:hover{
   display: none;
 }
 
+.show {
+  display: block;
+}
+
 .start {
   text-align: center;
 }

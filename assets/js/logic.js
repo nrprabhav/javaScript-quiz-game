@@ -4,8 +4,16 @@ let startScreen = document.querySelector("#start-screen");
 let questionScreen = document.querySelector("#questions");
 let questionTitle = document.querySelector("#question-title");
 let choices = document.querySelector("#choices");
+let finalScore = document.querySelector("#final-score");
+let endScreen = document.querySelector("#end-screen");
+let submit = document.querySelector("#submit");
+let initials = document.querySelector("#initials");
+
 let currentQuestion;
 let ol;
+let score = 0;
+let highScoreNames = [];
+let highScores = [];
 
 var secondsLeft = 60;
 
@@ -17,14 +25,20 @@ function setTime() {
         secondsLeft--;
         timeDisplay.textContent = secondsLeft;
 
-        if (secondsLeft === 0) {
+        if (secondsLeft <= 0) {
             // Stops execution of action at set interval
             clearInterval(timerInterval);
             // Calls function to create and append image
-            //sendMessage();
+            displayScore();
         }
 
     }, 1000);
+}
+
+function displayScore() {
+    questionScreen.setAttribute("class","hide");
+    finalScore.textContent=score;
+    endScreen.setAttribute("class","show");
 }
 
 function displayQuestion() {
@@ -46,15 +60,23 @@ function displayQuestion() {
 btnStart.addEventListener("click", function(){
     displayQuestion();
     setTime();
-})
+});
 
 questionScreen.addEventListener("click", function(event) {
     if(event.target.textContent === currentQuestion.answers){
         console.log("Corrent");
+        score += 5;
     }else{
         console.log("Wrong");
         secondsLeft -= 10;
     }
     ol.remove();
     displayQuestion();
+});
+/*
+submit.addEventListener("click", function(){
+    if(initials.value
+    highScoreNames.append();
+    localStorage.
 })
+*/
