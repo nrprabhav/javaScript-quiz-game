@@ -36,6 +36,14 @@ function setTime() {
     }, 1000);
 }
 
+function restartQuiz(){
+    score = 0;
+    questionScreen.setAttribute("class", "hide");
+    endScreen.setAttribute("class", "hide");
+    startScreen.setAttribute("class", "start");
+    timeDisplay.textContent = 0;
+}
+
 function displayScore() {
     questionScreen.setAttribute("class", "hide");
     finalScore.textContent = score;
@@ -73,17 +81,28 @@ questionScreen.addEventListener("click", function (event) {
         score += 5;
     } else {
         console.log("Wrong");
-        //secondsLeft -= 10;
+        secondsLeft -= 10;
     }
     questionNumber++;
     questionScreen.setAttribute("class", "hide");
     ol.remove();
     displayQuestion();
 });
-/*
+
 submit.addEventListener("click", function(){
-    if(initials.value
-    highScoreNames.append();
-    localStorage.
+    if(initials.value.length>0 && initials.value.length<=3){
+        highScoreNames = JSON.parse(localStorage.getItem('highScoreNames'));
+        if(highScoreNames==null){
+            highScoreNames=[];
+        }
+        highScores = JSON.parse(localStorage.getItem('highScores'));
+        if(highScores==null){
+            highScores=[];
+        }
+        highScoreNames.push(initials.value);
+        highScores.push(score);
+        localStorage.setItem('highScoreNames',JSON.stringify(highScoreNames));
+        localStorage.setItem('highScores',JSON.stringify(highScores));
+        restartQuiz();
+    }
 })
-*/

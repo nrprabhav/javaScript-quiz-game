@@ -45,7 +45,7 @@ let questions = [
         "answers": "in"
     },
     {
-        "title": "When an operator’s value is NULL, the typeof returned by the unary operator is:",
+        "title": "When an operator's value is NULL, the typeof returned by the unary operator is:",
         "choices": ["Boolean", "Undefined", "Object", "Integer"],
         "answers": "Object"
     },
