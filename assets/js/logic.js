@@ -9,6 +9,7 @@ let endScreen = document.querySelector("#end-screen");
 let submit = document.querySelector("#submit");
 let initials = document.querySelector("#initials");
 
+let questionNumber = 0;
 let currentQuestion;
 let ol;
 let score = 0;
@@ -25,7 +26,7 @@ function setTime() {
         secondsLeft--;
         timeDisplay.textContent = secondsLeft;
 
-        if (secondsLeft <= 0) {
+        if (secondsLeft <= 0 || questionNumber >= 10) {
             // Stops execution of action at set interval
             clearInterval(timerInterval);
             // Calls function to create and append image
@@ -36,40 +37,46 @@ function setTime() {
 }
 
 function displayScore() {
-    questionScreen.setAttribute("class","hide");
-    finalScore.textContent=score;
-    endScreen.setAttribute("class","show");
+    questionScreen.setAttribute("class", "hide");
+    finalScore.textContent = score;
+    endScreen.setAttribute("class", "show");
 }
 
 function displayQuestion() {
-    startScreen.setAttribute("class","hide");
-    currentQuestion = questions[Math.floor(Math.random() * 10)];
-    questionTitle.textContent = currentQuestion.title;
-    ol = document.createElement("ol");
-   //ol.innerHTML = "";
-    for(i=0; i<currentQuestion.choices.length; i++){
-        let choiceText = currentQuestion.choices[i];
-        let li = document.createElement("li");
-        li.textContent = choiceText;
-        ol.appendChild(li);
+    startScreen.setAttribute("class", "hide");
+    console.log(questionNumber);
+    if (questionNumber < 10) {
+        currentQuestion = questions[questionNumber];
+        questionTitle.textContent = currentQuestion.title;
+        ol = document.createElement("ol");
+        //ol.innerHTML = "";
+        for (i = 0; i < currentQuestion.choices.length; i++) {
+            let choiceText = currentQuestion.choices[i];
+            let li = document.createElement("li");
+            li.textContent = choiceText;
+            ol.appendChild(li);
+        }
+        choices.appendChild(ol);
+        questionScreen.setAttribute("class", "show");
     }
-    choices.appendChild(ol);
-    questionScreen.setAttribute("class","start");
 }
 
-btnStart.addEventListener("click", function(){
+btnStart.addEventListener("click", function () {
+    questionNumber = 0;
     displayQuestion();
     setTime();
 });
 
-questionScreen.addEventListener("click", function(event) {
-    if(event.target.textContent === currentQuestion.answers){
+questionScreen.addEventListener("click", function (event) {
+    if (event.target.textContent === currentQuestion.answers) {
         console.log("Corrent");
         score += 5;
-    }else{
+    } else {
         console.log("Wrong");
-        secondsLeft -= 10;
+        //secondsLeft -= 10;
     }
+    questionNumber++;
+    questionScreen.setAttribute("class", "hide");
     ol.remove();
     displayQuestion();
 });
