@@ -4,6 +4,8 @@ let startScreen = document.querySelector("#start-screen");
 let questionScreen = document.querySelector("#questions");
 let questionTitle = document.querySelector("#question-title");
 let choices = document.querySelector("#choices");
+let currentQuestion;
+let ol;
 
 var secondsLeft = 60;
 
@@ -25,11 +27,12 @@ function setTime() {
     }, 1000);
 }
 
-btnStart.addEventListener("click", function(){
+function displayQuestion() {
     startScreen.setAttribute("class","hide");
-    let currentQuestion = questions[Math.floor(Math.random() * 10)];
+    currentQuestion = questions[Math.floor(Math.random() * 10)];
     questionTitle.textContent = currentQuestion.title;
-    let ol = document.createElement("ol");
+    ol = document.createElement("ol");
+   //ol.innerHTML = "";
     for(i=0; i<currentQuestion.choices.length; i++){
         let choiceText = currentQuestion.choices[i];
         let li = document.createElement("li");
@@ -38,5 +41,20 @@ btnStart.addEventListener("click", function(){
     }
     choices.appendChild(ol);
     questionScreen.setAttribute("class","start");
+}
+
+btnStart.addEventListener("click", function(){
+    displayQuestion();
     setTime();
+})
+
+questionScreen.addEventListener("click", function(event) {
+    if(event.target.textContent === currentQuestion.answers){
+        console.log("Corrent");
+    }else{
+        console.log("Wrong");
+        secondsLeft -= 10;
+    }
+    ol.remove();
+    displayQuestion();
 })
