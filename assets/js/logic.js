@@ -8,6 +8,8 @@ let finalScore = document.querySelector("#final-score");
 let endScreen = document.querySelector("#end-screen");
 let submit = document.querySelector("#submit");
 let initials = document.querySelector("#initials");
+let audioCorrect = new Audio("./assets/sfx/correct.wav");
+let audioIncorrect = new Audio("./assets/sfx/incorrect.wav");
 
 let questionNumber = 0;
 let currentQuestion;
@@ -77,9 +79,11 @@ btnStart.addEventListener("click", function () {
 
 questionScreen.addEventListener("click", function (event) {
     if (event.target.textContent === currentQuestion.answers) {
+        audioCorrect.play();
         console.log("Corrent");
         score += 5;
     } else {
+        audioIncorrect.play();
         console.log("Wrong");
         secondsLeft -= 10;
     }
