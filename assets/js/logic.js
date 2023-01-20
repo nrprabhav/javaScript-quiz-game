@@ -41,6 +41,7 @@ function restartQuiz(){
     questionScreen.setAttribute("class", "hide");
     endScreen.setAttribute("class", "hide");
     startScreen.setAttribute("class", "start");
+    ol.remove();
     timeDisplay.textContent = 0;
 }
 
@@ -57,7 +58,6 @@ function displayQuestion() {
         currentQuestion = questions[questionNumber];
         questionTitle.textContent = currentQuestion.title;
         ol = document.createElement("ol");
-        //ol.innerHTML = "";
         for (i = 0; i < currentQuestion.choices.length; i++) {
             let choiceText = currentQuestion.choices[i];
             let li = document.createElement("li");
