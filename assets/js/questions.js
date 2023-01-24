@@ -1,3 +1,5 @@
+// File containing the quiz questions and answers
+
 let questions = [
     {
         "title": "Which of the following is not javascript data types?",
