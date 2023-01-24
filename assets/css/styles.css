@@ -95,3 +95,8 @@ li:hover{
   top: 10px;
   right: 10px;
 }
+
+#error{
+  color: red;
+  font-size: smaller;
+}

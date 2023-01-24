@@ -11,6 +11,7 @@ let finalScore = document.querySelector("#final-score");
 let endScreen = document.querySelector("#end-screen");
 let submit = document.querySelector("#submit");
 let initials = document.querySelector("#initials");
+let error = document.querySelector("#error");
 let audioCorrect = new Audio("./assets/sfx/correct.wav");
 let audioIncorrect = new Audio("./assets/sfx/incorrect.wav");
 
@@ -89,7 +90,7 @@ function displayQuestion() {
 
 function sortWithIndeces(toSort) {
     // Sort values in an array and keep note of the indices
-    
+
     for (var i = 0; i < toSort.length; i++) {
       toSort[i] = [toSort[i], i];
     }
@@ -159,5 +160,10 @@ submit.addEventListener("click", function(){
         localStorage.setItem('highScores',JSON.stringify(a));
         // Restarting the quiz
         restartQuiz();
+    }else{
+        if(initials.value.length>3)
+            error.textContent = "Error: Initials have to be 3 or less characters long";
+        if(initials.value.length==0)
+            error.textContent = "Error: Initials cannot be an empty string";
     }
 })
