@@ -24,8 +24,9 @@ A quiz is offered to the user when the page is opened. The features of the page 
   b. the page has a form to enter initials and store the scores
 7. On all the above pages, there is a link to view the high scores on the top left corner
 8. On the high scores page, the initials and the scores are displayed
-9. There is a button to go back to the start of the quiz or clear the high scores
-10. The high score is saved till cleared even when the page is closed
+9. The scores are displayed in descending order
+10. There is a button to go back to the start of the quiz or clear the high scores
+11. The high score is saved till cleared even when the page is closed
 
 ## Screenshots
 

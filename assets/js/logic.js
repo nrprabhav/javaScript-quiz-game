@@ -21,6 +21,7 @@ let ol;
 let score = 0;
 let highScoreNames = [];
 let highScores = [];
+let a;
 
 var secondsLeft = 60;
 
@@ -86,6 +87,23 @@ function displayQuestion() {
     }
 }
 
+function sortWithIndeces(toSort) {
+    // Sort values in an array and keep note of the indices
+    
+    for (var i = 0; i < toSort.length; i++) {
+      toSort[i] = [toSort[i], i];
+    }
+    toSort.sort(function(left, right) {
+      return left[0] < right[0] ? 1 : -1;
+    });
+    toSort.sortIndices = [];
+    for (var j = 0; j < toSort.length; j++) {
+      toSort.sortIndices.push(toSort[j][1]);
+      toSort[j] = toSort[j][0];
+    }
+    return toSort;
+}
+
 btnStart.addEventListener("click", function () {
     // Start quiz button
 
@@ -98,10 +116,12 @@ questionScreen.addEventListener("click", function (event) {
     // Action when an option is selected
 
     if (event.target.textContent === currentQuestion.answers) {
+        // Correct answers
         audioCorrect.play();
         console.log("Corrent");
         score += 5;
     } else {
+        // Wrong answers
         audioIncorrect.play();
         console.log("Wrong");
         secondsLeft -= 10;
@@ -116,6 +136,7 @@ submit.addEventListener("click", function(){
     // Action when user wants to store the score
 
     if(initials.value.length>0 && initials.value.length<=3){
+        // Reading from local storage
         highScoreNames = JSON.parse(localStorage.getItem('highScoreNames'));
         if(highScoreNames==null){
             highScoreNames=[];
@@ -124,10 +145,19 @@ submit.addEventListener("click", function(){
         if(highScores==null){
             highScores=[];
         }
+        // Adding the new score and new initials
         highScoreNames.push(initials.value);
         highScores.push(score);
-        localStorage.setItem('highScoreNames',JSON.stringify(highScoreNames));
-        localStorage.setItem('highScores',JSON.stringify(highScores));
+        // Arranging the scores in descending order
+        a = sortWithIndeces(highScores);
+        let temp=[];
+        for(i=0; i<highScoreNames.length; i++){
+            temp.push(highScoreNames[a.sortIndices[i]]);
+        }
+        // Storing in local storage
+        localStorage.setItem('highScoreNames',JSON.stringify(temp));
+        localStorage.setItem('highScores',JSON.stringify(a));
+        // Restarting the quiz
         restartQuiz();
     }
 })
