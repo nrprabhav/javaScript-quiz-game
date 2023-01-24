@@ -31,7 +31,10 @@ function setTime() {
     secondsLeft = 60;
     timerInterval = setInterval(function () {
         secondsLeft--;
-        timeDisplay.textContent = secondsLeft;
+        if (secondsLeft >= 0)
+            timeDisplay.textContent = secondsLeft;
+        else
+            timeDisplay.textContent = 0;
 
         if (secondsLeft <= 0 || questionNumber >= 10) {
             // Stops execution of action at set interval

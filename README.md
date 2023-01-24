@@ -17,7 +17,8 @@ A quiz is offered to the user when the page is opened. The features of the page 
 5. When a choice is pressed:
   a. A sound is played to indicate if the answer is right or wrong
   b. If the answer is wrong, 10s is deducted from the time
-  c. The next question is displayed
+  c. If the answer is correct, 5 marks are added to the score
+  d. The next question is displayed
 6. When the questions are all over or the timer reached zero, the quiz ends
   a. a page displaying the score is shown
   b. the page has a form to enter initials and store the scores
